@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Results</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Results</h1>
+    <h2>Predicted Kills for Next Match: {{ stats['sample_prediction'] }}</h2>
+    <p><strong>Mean Squared Error (MSE):</strong> {{ stats['mse'] }}</p>
+    <p><strong>R<sup>2</sup> Score:</strong> {{ stats['r2_score'] }}</p>
+    <p><strong>Most Likely Agent:</strong> {{ stats['agentPrediction'] }}</p>
+    <p><strong>Average ACS Against {{ opposing_team }}:</strong> {{ stats['avg_acs'] }}</p>
+    <p><strong>Average Kills Against {{ opposing_team }}:</strong> {{ stats['avg_kills'] }}</p>
+
+    <h2>Recent Matches</h2>
+    <table>
+        <tr>
+            <th>Team</th>
+            <th>Score</th>
+            <th>Opponent</th>
+            <th>Score</th>
+            <th>Agent</th>
+            <th>Kills</th>
+            <th>Deaths</th>
+            <th>ACS</th>
+        </tr>
+        {% for match in stats['recent_matches'] %}
+        <tr>
+            <td>{{ match['Player team'] }}</td>
+            <td>{{ match['Winning team score'] if match['Winning team'] == match['Player team'] else match['Losing team score'] }}</td>
+            <td>{{ match['Opposite team'] }}</td>
+            <td>{{ match['Losing team score'] if match['Winning team'] == match['Player team'] else match['Winning team score'] }}</td>
+            <td>{{ match['Agent'] }}</td>
+            <td>{{ match['Kills'] }}</td>
+            <td>{{ match['Deaths'] }}</td>
+            <td>{{ match['ACS'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

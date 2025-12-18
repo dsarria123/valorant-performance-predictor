@@ -69,3 +69,12 @@ A version of the function also includes an optional 90% prediction interval base
 - **Prediction:** clean function for real-time or batch prediction based on player and opponent names
 
 This setup allows continuous data updates through the scraper, seamless database integration, and reproducible training and evaluation directly within `xgboost-model.ipynb`.
+
+## Limitations & Future Work
+- The model does not account for map, agent selection, or team composition,
+  which are intentionally excluded to preserve pre-match validity.
+- Player form is approximated through rolling and exponentially weighted
+  averages rather than sequence models.
+- Future work could explore hierarchical or Bayesian approaches to better
+  handle uncertainty for low-sample players.
+
